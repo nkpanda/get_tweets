@@ -9,11 +9,11 @@ import re
 import tweepy
 
 #Get your Twitter API credentials and enter them here
-consumer_key = "TRLdW7ZTqmMqUkQnijwok274X"
-consumer_secret = "y27qouVPuD9Om1fHxwiDU4HgaXejIhKUBUad1uopSqrXIHp3pI"
-access_key = "474100823-OtWdKAA69svHE2afiYD27SekjskZ37M9aOXPXYRY"
-access_secret = "7xQgEV4mBxnifQ57bbAL68bYoiPO8UpE9qXGl01QWN0TQ"
-
+consumer_key = "add your key"
+consumer_secret = "add your key"
+access_key = "add your key"
+access_secret = "add your key"
+#Save other users taged in the communication
 tuser = csv.writer(open("tuser.csv", "wb"))
 
 #method to get a user's last 100 tweets
@@ -32,6 +32,7 @@ def get_tweets(username):
 
 	#create array of tweet information: username, tweet id, date/time, text
 	tweets_for_csv = [[username,tweet.id_str, tweet.created_at, tweet.text.encode("utf-8")] for tweet in tweets]
+	#Loop for searching for users tagged
 	for tweet in tweets:
 		#print tweet.text.encode("utf-8")
 		tuseradd = re.findall(r"@([A-Za-z0-9_]+)", tweet.text.encode("utf-8"))
