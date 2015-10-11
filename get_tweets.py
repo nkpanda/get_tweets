@@ -3,15 +3,18 @@
 
 import sys
 import csv
+import re
 
 #http://www.tweepy.org/
 import tweepy
 
 #Get your Twitter API credentials and enter them here
-consumer_key = "your_consumer_key"
-consumer_secret = "your_consumer_secret"
-access_key = "your_access_key"
-access_secret = "your_access_secret"
+consumer_key = "TRLdW7ZTqmMqUkQnijwok274X"
+consumer_secret = "y27qouVPuD9Om1fHxwiDU4HgaXejIhKUBUad1uopSqrXIHp3pI"
+access_key = "474100823-OtWdKAA69svHE2afiYD27SekjskZ37M9aOXPXYRY"
+access_secret = "7xQgEV4mBxnifQ57bbAL68bYoiPO8UpE9qXGl01QWN0TQ"
+
+tuser = csv.writer(open("tuser.csv", "wb"))
 
 #method to get a user's last 100 tweets
 def get_tweets(username):
@@ -29,7 +32,10 @@ def get_tweets(username):
 
 	#create array of tweet information: username, tweet id, date/time, text
 	tweets_for_csv = [[username,tweet.id_str, tweet.created_at, tweet.text.encode("utf-8")] for tweet in tweets]
-
+	for tweet in tweets:
+		#print tweet.text.encode("utf-8")
+		tuseradd = re.findall(r"@([A-Za-z0-9_]+)", tweet.text.encode("utf-8"))
+		tuser.writerow(tuseradd)
 	#write to a new csv file from the array of tweets
 	print "writing to {0}_tweets.csv".format(username)
 	with open("{0}_tweets.csv".format(username) , 'w+') as file:
